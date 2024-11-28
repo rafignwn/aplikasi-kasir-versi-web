@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Management from "./layouts/Management";
 import Dashboard from "./pages/Dashboard";
+import Produk from "./pages/Produk";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/cashier" element={<Casier />} />
             <Route element={<Management />}>
               <Route path="/management" element={<Dashboard />} />
+              <Route path="/produk" element={<Produk />} />
             </Route>
           </Routes>
         </Router>

@@ -15,7 +15,7 @@ export default function Management() {
         <div className="mt-10 px-5">
           <NavLink to="/" Icon={Home} title="Home" />
           <NavLink to="/management" Icon={DashboardTwo} title="Dashboard" />
-          <NavLink to="/item" Icon={Box} title="Items" />
+          <NavLink to="/produk" Icon={Box} title="Produk" />
           <NavLink to="/category" Icon={Tag} title="Category" />
           <NavLink to="/transaction" Icon={Exchange} title="Transaction" />
           <NavLink to="/report" Icon={Log} title="Report" />

@@ -20,7 +20,7 @@ export interface IItemTransaction {
 
 // Fungsi untuk mengambil dan meningkatkan nilai counter
 const incrementTransactionCounter = async (): Promise<number> => {
-  const counterRef = doc(db, "counters", "transactionCounter"); // Dokumen counter
+  const counterRef = doc(db, "counters", "transactionCounter-web"); // Dokumen counter
   const counterSnap = await getDoc(counterRef);
 
   if (counterSnap.exists()) {
@@ -63,7 +63,7 @@ export async function addTransaction(
     };
 
     const docRef = await addDoc(
-      collection(db, "transactions"),
+      collection(db, "transactions-web"),
       transactionData
     );
     return docRef.id;
