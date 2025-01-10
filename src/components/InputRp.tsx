@@ -22,10 +22,12 @@ export default function InputRp({
   setValue,
   id,
   className,
+  placeholder,
 }: {
   setValue: Dispatch<SetStateAction<number>>;
   id: string;
   className: string;
+  placeholder: string;
 }) {
   const [inputValue, setInputValue] = useState<string>(""); // Untuk menyimpan format Rupiah
 
@@ -44,7 +46,7 @@ export default function InputRp({
       type="text"
       value={inputValue} // Tampilkan nilai yang diformat (Rupiah)
       onChange={handleInputChange}
-      placeholder="Rp. 0"
+      placeholder={`${placeholder} Rp. 0`}
       className={className}
       autoFocus={true}
       inputMode="numeric" // Membatasi input hanya untuk angka di perangkat mobile

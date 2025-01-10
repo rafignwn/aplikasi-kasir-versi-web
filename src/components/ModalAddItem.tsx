@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { IItemAdd } from "../functions/addItems";
 import { Mosaic } from "react-loading-indicators";
+import InputRp from "./InputRp";
 
 interface IPropsAddModalItem {
   isOpen: boolean;
@@ -18,6 +19,8 @@ function ModalAddItem({ isOpen, onClose }: IPropsAddModalItem) {
   const [imgName, setImageName] = useState<string>("");
   const { setItems } = useContext(ItemsContext);
   const [loading, setLoading] = useState<boolean>(false);
+  const [hargaBeli, setHargaBeli] = useState<number>(0);
+  const [hargaJual, setHargaJual] = useState<number>(0);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -53,8 +56,8 @@ function ModalAddItem({ isOpen, onClose }: IPropsAddModalItem) {
     const itemData: IItemAdd = {
       name: formData.get("name") as string,
       categori: selectedCategory,
-      purchasePrice: Number(formData.get("purchasePrice")),
-      sellingPrice: Number(formData.get("sellingPrice")),
+      purchasePrice: hargaBeli,
+      sellingPrice: hargaJual,
       stock: Number(formData.get("qty")),
     };
 
@@ -146,24 +149,34 @@ function ModalAddItem({ isOpen, onClose }: IPropsAddModalItem) {
               { value: "minuman", label: "Minuman" },
               { value: "atk", label: "Alat Tulis Kantor" },
               { value: "atribut", label: "Atribut Sekolah" },
+              { value: "sparepart", label: "Sparepart Motor" },
+              { value: "kosmetik", label: "Kosmetik" },
+              { value: "sembako", label: "Sembako" },
+              { value: "elektronik", label: "Elektronik" },
             ]}
             className="font-semibold rounded-md focus:border focus:border-sky-400 focus:outline-none border w-[24rem]"
           />
           {/* end react select */}
-          <input
+          {/* <input
             required
             placeholder="Purchase price"
             name="purchasePrice"
             type="number"
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
+          /> */}
+
+          <InputRp
+            className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
+            id="hargaBeli"
+            placeholder="Harga Jual"
+            setValue={(value) => setHargaBeli(value)}
           />
 
-          <input
-            required
-            placeholder="Selling price"
-            name="sellingPrice"
-            type="number"
+          <InputRp
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
+            id="hargaBeli"
+            placeholder="Harga Beli"
+            setValue={(value) => setHargaJual(value)}
           />
 
           <input
