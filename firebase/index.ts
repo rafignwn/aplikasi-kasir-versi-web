@@ -7,17 +7,15 @@ import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA5S5eratKXMn2mbHJhlu9VqdnAHh9HW7c",
-  authDomain: "pos-app-d750a.firebaseapp.com",
-  databaseURL:
-    "https://pos-app-d750a-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "pos-app-d750a",
-  storageBucket: "pos-app-d750a.appspot.com",
-  messagingSenderId: "58415204118",
-  appId: "1:58415204118:web:3ba14e1bd7a236527d3237",
+  apiKey: "AIzaSyBfEevsVyYh7vrdm8EJWkdeYVwS0ikxyyc",
+  authDomain: "aplikasi-kasir-75880.firebaseapp.com",
+  projectId: "aplikasi-kasir-75880",
+  storageBucket: "aplikasi-kasir-75880.firebasestorage.app",
+  messagingSenderId: "20645580170",
+  appId: "1:20645580170:web:5940de83f6f1c758854c73",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-export const storage = getStorage(app);
+export const storage = getStorage(app, "pos-app-d750a.appspot.com");
