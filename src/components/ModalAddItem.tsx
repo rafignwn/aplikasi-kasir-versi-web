@@ -6,14 +6,17 @@ import toast from "react-hot-toast";
 import { ItemsContext } from "../contexts/ItemsContext";
 import { IItemAdd } from "../functions/addItems";
 import { Mosaic } from "react-loading-indicators";
-import InputRp from "./InputRp";
+import InputRp, { formatRupiah } from "./InputRp";
+import IItem from "../interface/Items";
+import { updateItem } from "../functions/updateItem";
 
 interface IPropsAddModalItem {
   isOpen: boolean;
   onClose: () => void;
+  item?: IItem;
 }
 
-function ModalAddItem({ isOpen, onClose }: IPropsAddModalItem) {
+function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
   const modalRef = useRef<HTMLDivElement>(null);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [imgName, setImageName] = useState<string>("");
@@ -21,6 +24,14 @@ function ModalAddItem({ isOpen, onClose }: IPropsAddModalItem) {
   const [loading, setLoading] = useState<boolean>(false);
   const [hargaBeli, setHargaBeli] = useState<number>(0);
   const [hargaJual, setHargaJual] = useState<number>(0);
+
+  useEffect(() => {
+    if (item) {
+      setSelectedCategory(item.categori);
+      setHargaBeli(item.purchasePrice);
+      setHargaJual(item.sellingPrice);
+    }
+  }, [item]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -61,17 +72,34 @@ function ModalAddItem({ isOpen, onClose }: IPropsAddModalItem) {
       stock: Number(formData.get("qty")),
     };
 
-    const data = await addItem(itemData, file);
+    const data = item?.id
+      ? await updateItem(
+          { ...itemData, imageUrl: item.imageUrl },
+          item.id,
+          file
+        )
+      : await addItem(itemData, file);
 
     setSelectedCategory("");
     if (data) {
       // memperbarui isi variable items
-      setItems((items) => [...items, data]);
+      item
+        ? setItems((items) =>
+            items.map((item) => {
+              if (item.id == data.id) {
+                return data;
+              }
+              return item;
+            })
+          )
+        : setItems((items) => [...items, data]);
       // menutup modal tambah item
       onClose();
       // menampilkan notif sukses
       setLoading(false);
-      return toast.success("Berhasil menambahkan item");
+      return toast.success(
+        !item ? "Berhasil menambahkan item" : "Berhasil mengupdate data"
+      );
     } else {
       onClose();
       setLoading(false);
@@ -109,6 +137,7 @@ function ModalAddItem({ isOpen, onClose }: IPropsAddModalItem) {
             required
             autoFocus={true}
             placeholder="Name of Item"
+            value={item?.name}
             name="name"
             type="text"
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
@@ -169,12 +198,18 @@ function ModalAddItem({ isOpen, onClose }: IPropsAddModalItem) {
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
             id="hargaBeli"
             placeholder="Harga Jual"
+            defaultValue={
+              item ? formatRupiah(item?.purchasePrice.toString()) : ""
+            }
             setValue={(value) => setHargaBeli(value)}
           />
 
           <InputRp
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
             id="hargaBeli"
+            defaultValue={
+              item ? formatRupiah(item?.sellingPrice.toString()) : ""
+            }
             placeholder="Harga Beli"
             setValue={(value) => setHargaJual(value)}
           />
@@ -182,6 +217,7 @@ function ModalAddItem({ isOpen, onClose }: IPropsAddModalItem) {
           <input
             placeholder="Qty"
             type="number"
+            value={item?.stock}
             name="qty"
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
           />

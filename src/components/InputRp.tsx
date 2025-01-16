@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 
 // Fungsi untuk memformat angka menjadi format Rupiah
-function formatRupiah(value: string): string {
+export function formatRupiah(value: string): string {
   let numberString = value.replace(/[^,\d]/g, "").toString();
   let split = numberString.split(",");
   let remainder = split[0].length % 3;
@@ -23,13 +23,15 @@ export default function InputRp({
   id,
   className,
   placeholder,
+  defaultValue,
 }: {
   setValue: Dispatch<SetStateAction<number>>;
   id: string;
   className: string;
   placeholder: string;
+  defaultValue?: string;
 }) {
-  const [inputValue, setInputValue] = useState<string>(""); // Untuk menyimpan format Rupiah
+  const [inputValue, setInputValue] = useState<string>(defaultValue || ""); // Untuk menyimpan format Rupiah
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/[^0-9]/g, ""); // Hanya angka yang diterima
