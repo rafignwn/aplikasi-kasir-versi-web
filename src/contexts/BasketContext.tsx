@@ -6,6 +6,7 @@ export interface IBasketItem extends IItems {
   key: number;
   qty: number;
   total: number;
+  stock: number;
 }
 
 // create variable type for basket state

@@ -48,11 +48,18 @@ function ModalItem({ isOpen, onClose, dataItem }: IPropsModalItem) {
       toast.error("Tolong disi jumlah barang yang akan dibeli!"); // update minggu 19/01/25
       return false;
     }
+
+    if (parseInt(qty as string) > dataItem.stock) {
+      toast.error("Stock produk tidak cukup!");
+      return false;
+    }
+
     // add item to basket
     const newBasketItem: IBasketItem = {
       ...dataItem,
       key: baskets.length + 1,
       qty,
+      stock: dataItem.stock,
       total: dataItem.sellingPrice * (qty as number),
     } as IBasketItem;
     const newBaskets: TBaskets = baskets;

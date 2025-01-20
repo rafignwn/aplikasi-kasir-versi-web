@@ -54,7 +54,7 @@ export async function addTransaction(
   });
 
   await Promise.all(
-    baskets.map((basket) => updateStock(basket.id, basket.qty))
+    baskets.map((basket) => updateStock(basket.id, basket.stock - basket.qty))
   );
 
   try {
