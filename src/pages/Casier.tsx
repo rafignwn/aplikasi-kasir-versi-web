@@ -48,7 +48,7 @@ export default function Casier() {
 
   return (
     <>
-      <div className="bg-gray-100 p-10 gap-x-10 grid grid-cols-6 grid-rows-6 h-full">
+      <div className="bg-gradient-to-tr from-amber-100 to-amber-300 p-10 gap-x-10 grid grid-cols-6 grid-rows-6 h-full">
         <div className="col-span-1 min-w-fit row-span-6 grid grid-rows-6">
           <div className="row-span-1">
             <BackBtn />

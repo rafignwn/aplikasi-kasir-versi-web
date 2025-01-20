@@ -6,6 +6,7 @@ import {
   IBasketItem,
   TBaskets,
 } from "../contexts/BasketContext";
+import toast from "react-hot-toast";
 
 interface IPropsModalItem {
   isOpen: boolean;
@@ -43,7 +44,8 @@ function ModalItem({ isOpen, onClose, dataItem }: IPropsModalItem) {
   }
 
   function handleAddToBasket() {
-    if (qty === 0) {
+    if (qty == 0) {
+      toast.error("Tolong disi jumlah barang yang akan dibeli!"); // update minggu 19/01/25
       return false;
     }
     // add item to basket

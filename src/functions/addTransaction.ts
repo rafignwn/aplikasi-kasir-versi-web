@@ -9,6 +9,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
+import { updateStock } from "./updateStock";
 
 export interface IItemTransaction {
   id: string;
@@ -42,13 +43,19 @@ export async function addTransaction(
   totalAmount: number,
   paymentMethod: "cash" | "credit"
 ) {
-  const items: Array<IItemTransaction> = baskets.map((basket) => ({
-    id: basket.id,
-    name: basket.name,
-    price: basket.sellingPrice,
-    subtotal: basket.total,
-    qty: basket.qty,
-  }));
+  const items: Array<IItemTransaction> = baskets.map((basket) => {
+    return {
+      id: basket.id,
+      name: basket.name,
+      price: basket.sellingPrice,
+      subtotal: basket.total,
+      qty: basket.qty,
+    };
+  });
+
+  await Promise.all(
+    baskets.map((basket) => updateStock(basket.id, basket.qty))
+  );
 
   try {
     const transactionNumber = await incrementTransactionCounter();

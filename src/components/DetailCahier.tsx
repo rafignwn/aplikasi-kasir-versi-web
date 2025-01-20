@@ -7,6 +7,9 @@ import toast from "react-hot-toast";
 import PaymentReceipt from "../print/PaymentReceipt";
 import { useReactToPrint } from "react-to-print";
 import InputRp from "./InputRp";
+import { ItemsContext } from "../contexts/ItemsContext";
+// update minggu 19/01/25
+import { getItems } from "../functions/getItems";
 
 function DetailCashier() {
   const { baskets, setBaskets } = useContext(BasketContext);
@@ -18,6 +21,8 @@ function DetailCashier() {
     contentRef: componentRef,
   });
   const basketIsEmpty = baskets.length == 0;
+  // update minggu 19/01/25
+  const { setItems } = useContext(ItemsContext);
 
   const [keyActive, setKeyActive] = useState<Array<number>>([]);
   let total: number = 0;
@@ -48,6 +53,11 @@ function DetailCashier() {
     if (isTransaction) {
       setOnCheckout(false);
       setIsAfterTransaction(true);
+
+      // update minggu 19/01/25
+      // memperbarui data items
+      const data = await getItems();
+      setItems(data);
     } else {
       return toast.error("Transaksi Gagal", { duration: 2000 });
     }
@@ -61,6 +71,7 @@ function DetailCashier() {
     setBaskets([]);
     // menutup modal cetak struk
     setIsAfterTransaction(false);
+    setCash(0);
     // menampilkan notifikasi berhasil
     return toast.success("Transaksi Berhasil 👌", { duration: 2000 });
   }
@@ -74,12 +85,19 @@ function DetailCashier() {
     return toast.success("Transaksi Berhasil 👌", { duration: 2000 });
   }
 
+  // update minggu 19/01/25
+  // menambahkan aksi tombol cancel ketika tidak jadi bayar
+  function handleCancel() {
+    setCash(0);
+    setOnCheckout(false);
+  }
+
   return (
     <>
       <div className="h-full grid grid-rows-6 gap-y-2">
-        <div className="relative bg-white row-span-5 p-4 rounded-md h-full shadow-md flex flex-col">
+        <div className="relative bg-red-300 row-span-5 p-4 rounded-md h-full shadow-md flex flex-col">
           <h2 className="font-bold flex justify-center items-center gap-2 text-lg bg-yellow-200 rounded-md px-4 py-1">
-            <ShoppingBag size={24} theme="filled" fill={"#a16207"} />
+            <ShoppingBag size={24} theme="filled" fill={"#000"} />
             <span>Detail Pembelian</span>
             <ShoppingBag size={24} theme="filled" fill={"#a16207"} />
           </h2>
@@ -188,6 +206,7 @@ function DetailCashier() {
               </label>
               <InputRp
                 id="InputTunai"
+                placeholder="Masukan Tunai" // update minggu 19/01/25
                 setValue={setCash}
                 className="px-4 py-2 w-full rounded-md border-[3px] focus:outline-none focus:border-sky-900"
               />
@@ -199,7 +218,10 @@ function DetailCashier() {
               )}`}</h3>
             </div>
             <div className="mt-4 grid grid-cols-2 gap-4">
-              <button className="col-span-1 block w-full text-center py-2 capitalize tracking-widest rounded-md text-gray-500 shadow-md border-r-4 border-b-4 border-gray-500 bg-gray-50">
+              <button
+                onClick={handleCancel}
+                className="col-span-1 block w-full text-center py-2 capitalize tracking-widest rounded-md text-gray-500 shadow-md border-r-4 border-b-4 border-gray-500 bg-gray-50"
+              >
                 Cancel
               </button>
               <button

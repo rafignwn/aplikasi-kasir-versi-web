@@ -15,7 +15,7 @@ export default React.forwardRef<HTMLDivElement, {}>(function PaymentReceipt(
         {`
             @media print {
                 @page {
-                    size: 50mm ${40 + baskets.length * 11}mm;
+                    size: 100mm ${40 + baskets.length * 11}mm;
                     margin: 5px;
                 }
             }
@@ -30,17 +30,17 @@ export default React.forwardRef<HTMLDivElement, {}>(function PaymentReceipt(
         return (
           <div className="grid grid-cols-12 my-2 gap-2 place-items-center">
             <p className="leading-3 col-span-5">{basket.name}</p>
-            <p className="col-span-1 text-center">{basket.qty}</p>
-            <p className="col-span-3 text-right">
+            <p className="col-span-1 text-sm text-center">{basket.qty}</p>
+            <p className="col-span-3 text-sm text-right">
               {basket.sellingPrice.toLocaleString("id-ID")}
             </p>
-            <p className="col-span-3 text-right">
+            <p className="col-span-3 text-sm text-right">
               {basket.total.toLocaleString("id-ID")}
             </p>
           </div>
         );
       })}
-      <div className="mt-4 py-1 border-y flex justify-between items-center ">
+      <div className="mt-4 py-1 border-y flex justify-between items-center px-2">
         <p className="font-bold tracking-widest">TOTAL</p>
         <p className="font-bold tracking-widest">
           {totalAmount.toLocaleString("id-ID")}

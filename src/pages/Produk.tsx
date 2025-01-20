@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { ItemsContext } from "../contexts/ItemsContext";
 import IItem from "../interface/Items";
-import deleteItem from "../functions/deleteItems";
+import deleteItem from "../functions/deleteItem";
 import { ModalAddItem } from "../components";
 
 export default function Produk() {
@@ -46,7 +46,7 @@ export default function Produk() {
             >
               <div className="flex justify-between items-center">
                 <div className="p-3">
-                  <p>{p.name}</p>
+                  <p className="font-bold">{p.name}</p>
                   <p>{p.sellingPrice}</p>
                 </div>
                 <div className="p-3">

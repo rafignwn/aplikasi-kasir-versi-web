@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Management from "./layouts/Management";
 import Dashboard from "./pages/Dashboard";
 import Produk from "./pages/Produk";
+import Category from "./pages/Category";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route element={<Management />}>
               <Route path="/management" element={<Dashboard />} />
               <Route path="/produk" element={<Produk />} />
+              <Route path="/category" element={<Category />} />
             </Route>
           </Routes>
         </Router>
