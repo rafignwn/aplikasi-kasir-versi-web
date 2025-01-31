@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TransactionsContext } from "../contexts/TransactionContext";
 import ITransaction from "../interface/transaction";
 
 export default function Transaksi() {
-  const { transactions } = useContext(TransactionsContext);
+  const { transactions, refresh } = useContext(TransactionsContext);
   const [sortConfig, setSortConfig] = useState<{
     key: keyof ITransaction;
     direction: "ascending" | "descending";
@@ -25,17 +25,27 @@ export default function Transaksi() {
     return sortableTransactions;
   }, [transactions, sortConfig]);
 
-  const requestSort = (key: keyof ITransaction) => {
-    let direction: "ascending" | "descending" = "ascending";
+  const requestSort = (
+    key: keyof ITransaction,
+    direction?: "ascending" | "descending"
+  ) => {
+    let _direction: "ascending" | "descending" = direction
+      ? direction
+      : "ascending";
     if (
       sortConfig &&
       sortConfig.key === key &&
       sortConfig.direction === "ascending"
     ) {
-      direction = "descending";
+      _direction = "descending";
     }
-    setSortConfig({ key, direction });
+    setSortConfig({ key, direction: _direction });
   };
+
+  useEffect(() => {
+    refresh();
+    requestSort("timestamp", "ascending");
+  }, []);
 
   return (
     <div className="container mx-auto px-4 sm:px-8 h-full grid grid-rows-12">
@@ -79,7 +89,7 @@ export default function Transaksi() {
           <tbody>
             {sortedTransactions.map((transaction) => (
               <tr key={transaction.id}>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <td className="px-5 font-bold py-5 border-b border-gray-200 bg-white text-sm">
                   {transaction.transactionNumber}
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -89,10 +99,20 @@ export default function Transaksi() {
                   {transaction.customerId}
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  {new Date(transaction.timestamp.nanoseconds).toLocaleString()}
+                  {new Date(
+                    transaction.timestamp.seconds * 1000
+                  ).toLocaleDateString("id-ID", {
+                    weekday: "long",
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                  })}
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                  {`Rp ${transaction.totalAmount.toLocaleString()}`}
+                  {`Rp. ${transaction.totalAmount.toLocaleString("id-ID")}`}
                 </td>
               </tr>
             ))}

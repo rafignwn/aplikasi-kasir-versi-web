@@ -11,11 +11,13 @@ import ITransaction from "../interface/transaction";
 export interface ITransactionsContext {
   transactions: Array<ITransaction>;
   setTransactions: Dispatch<SetStateAction<Array<ITransaction>>>;
+  refresh: () => void;
 }
 
 const INITIAL_STATE: ITransactionsContext = {
   transactions: [],
   setTransactions: () => {},
+  refresh: () => {},
 };
 
 export const TransactionsContext: React.Context<ITransactionsContext> =
@@ -28,17 +30,19 @@ export default function TransactionsContextProvider({
 }) {
   const [transactions, setTransactions] = useState<Array<ITransaction>>([]);
 
-  useEffect(() => {
-    async function fetchItems() {
-      const data = await getTransactions();
-      setTransactions(data);
-    }
+  async function fetchItems() {
+    const data = await getTransactions();
+    setTransactions(data);
+  }
 
+  useEffect(() => {
     fetchItems();
   }, []);
 
   return (
-    <TransactionsContext.Provider value={{ transactions, setTransactions }}>
+    <TransactionsContext.Provider
+      value={{ transactions, setTransactions, refresh: fetchItems }}
+    >
       {children}
     </TransactionsContext.Provider>
   );
