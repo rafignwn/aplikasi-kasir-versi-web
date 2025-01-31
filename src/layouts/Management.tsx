@@ -17,12 +17,12 @@ export default function Management() {
           <NavLink to="/management" Icon={DashboardTwo} title="Dashboard" />
           <NavLink to="/produk" Icon={Box} title="Produk" />
           <NavLink to="/category" Icon={Tag} title="Category" />
-          <NavLink to="/transaction" Icon={Exchange} title="Transaction" />
+          <NavLink to="/transaksi" Icon={Exchange} title="Data Transaksi" />
           <NavLink to="/report" Icon={Log} title="Report" />
         </div>
         {/* end menu */}
       </div>
-      <div className="px-5 col-span-6">
+      <div className="px-5 col-span-6 row-span-4 overflow-auto">
         <Outlet />
       </div>
     </div>

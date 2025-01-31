@@ -6,6 +6,7 @@ import Management from "./layouts/Management";
 import Dashboard from "./pages/Dashboard";
 import Produk from "./pages/Produk";
 import Category from "./pages/Category";
+import Transaksi from "./pages/Transaksi";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
               <Route path="/management" element={<Dashboard />} />
               <Route path="/produk" element={<Produk />} />
               <Route path="/category" element={<Category />} />
+              <Route path="/transaksi" element={<Transaksi />} />
             </Route>
           </Routes>
         </Router>

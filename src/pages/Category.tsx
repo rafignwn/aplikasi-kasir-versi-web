@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { CategoriesContext } from "../contexts/categoriesContext";
+import { CategoriesContext } from "../contexts/CategoriesContext";
 import { getCategories } from "../functions/getCategories";
 import CategoryItem from "../components/CategoryItem";
 import { addCategory } from "../functions/addCategory";
@@ -10,6 +10,7 @@ export default function Category() {
   const { categories, setCategories } = useContext(CategoriesContext);
   const [showAddCategory, setShowAddCategory] = useState<boolean>(false);
   const [inputCategory, setInputCategory] = useState<string>("");
+  const [loadingDelete, setLoadingDelete] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -30,6 +31,7 @@ export default function Category() {
 
   //   fungsi untuk menyimpan data kategori baru
   async function handleSaveCategory() {
+    setLoadingDelete(true);
     if (inputCategory == "") {
       return false;
     }
@@ -45,6 +47,7 @@ export default function Category() {
     ]);
     toast.success("Data kategori baru berhasil ditambahkan.");
     closeModal();
+    setLoadingDelete(false);
   }
 
   return (
@@ -97,10 +100,13 @@ export default function Category() {
                 Batal
               </button>
               <button
+                disabled={loadingDelete}
                 onClick={handleSaveCategory}
-                className="flex-1 py-2 rounded-sm font-bold uppercase text-sky-100 bg-sky-700"
+                className={`flex-1 py-2 rounded-sm font-bold uppercase text-sky-100 bg-sky-700 ${
+                  loadingDelete && "bg-opacity-5"
+                }`}
               >
-                Simpan
+                {loadingDelete ? "Loading..." : "Simpan"}
               </button>
             </div>
           </div>
