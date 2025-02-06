@@ -80,6 +80,7 @@ export default function Casier() {
                     title={data.name}
                     imgUrl={data.imageUrl}
                     stok={data.stock}
+                    diskon={data.diskon}
                     onClick={() => openModal({ ...data } as IItem)}
                   />
                 );

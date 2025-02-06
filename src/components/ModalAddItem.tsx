@@ -70,6 +70,7 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
       purchasePrice: hargaBeli,
       sellingPrice: hargaJual,
       stock: Number(formData.get("qty")),
+      diskon: Number(formData.get("diskon")),
     };
 
     const data = item?.id
@@ -197,7 +198,7 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
           <InputRp
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
             id="hargaBeli"
-            placeholder="Harga Jual"
+            placeholder="Harga Beli"
             defaultValue={
               item ? formatRupiah(item?.purchasePrice.toString()) : ""
             }
@@ -206,12 +207,21 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
 
           <InputRp
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
-            id="hargaBeli"
+            id="hargaJual"
             defaultValue={
               item ? formatRupiah(item?.sellingPrice.toString()) : ""
             }
-            placeholder="Harga Beli"
+            placeholder="Harga Jual"
             setValue={(value) => setHargaJual(value)}
+          />
+
+          <input
+            placeholder="Diskon (%)"
+            max={100}
+            type="number"
+            value={item?.diskon}
+            name="diskon"
+            className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
           />
 
           <input

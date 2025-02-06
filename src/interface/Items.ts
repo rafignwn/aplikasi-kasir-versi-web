@@ -6,6 +6,7 @@ interface IItem {
   purchasePrice: number;
   sellingPrice: number;
   stock: number;
+  diskon: number;
 }
 
 export default IItem;

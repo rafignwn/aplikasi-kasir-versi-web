@@ -9,6 +9,7 @@ export interface IItemAdd {
   purchasePrice: number;
   sellingPrice: number;
   stock: number;
+  diskon: number;
 }
 
 export async function uploadImage(file: File): Promise<string> {

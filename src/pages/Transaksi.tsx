@@ -49,40 +49,40 @@ export default function Transaksi() {
 
   return (
     <div className="container mx-auto px-4 sm:px-8 h-full grid grid-rows-12">
-      <h1 className="text-xl font-bold text-green-700">Data Transaksi</h1>
+      <h1 className="text-xl font-bold text-pink-700">Data Transaksi</h1>
       <div className="row-span-12 overflow-auto bg-pink-200">
-        <table className="min-w-full leading-normal bg-green-500">
-          <thead className="bg-green-200 sticky top-0 z-10">
+        <table className="min-w-full leading-normal bg-pink-500">
+          <thead className="bg-pink-200 sticky top-0 z-10">
             <tr>
               <th
                 onClick={() => requestSort("transactionNumber")}
-                className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs text-green-800 font-bold uppercase tracking-wider cursor-pointer"
+                className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs text-pink-800 font-bold uppercase tracking-wider cursor-pointer"
               >
                 ID
               </th>
               <th
                 onClick={() => requestSort("cashierId")}
-                className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs text-green-800 font-bold uppercase tracking-wider cursor-pointer"
+                className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs text-pink-800 font-bold uppercase tracking-wider cursor-pointer"
               >
                 Cashier ID
               </th>
               <th
                 onClick={() => requestSort("customerId")}
-                className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs text-green-800 font-bold uppercase tracking-wider cursor-pointer"
+                className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs text-pink-800 font-bold uppercase tracking-wider cursor-pointer"
               >
                 Customer ID
               </th>
               <th
                 onClick={() => requestSort("timestamp")}
-                className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs text-green-800 font-bold uppercase tracking-wider cursor-pointer"
+                className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs text-pink-800 font-bold uppercase tracking-wider cursor-pointer"
               >
-                Timestamp
+                Waktu Transaksi
               </th>
               <th
                 onClick={() => requestSort("totalAmount")}
-                className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs text-green-800 font-bold uppercase tracking-wider cursor-pointer"
+                className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs text-pink-800 font-bold uppercase tracking-wider cursor-pointer"
               >
-                Total Amount
+                Total Belanja
               </th>
             </tr>
           </thead>
