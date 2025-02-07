@@ -60,7 +60,11 @@ function ModalItem({ isOpen, onClose, dataItem }: IPropsModalItem) {
       key: baskets.length + 1,
       qty,
       stock: dataItem.stock,
-      total: dataItem.sellingPrice * (qty as number),
+      total:
+        (dataItem.sellingPrice -
+          dataItem.sellingPrice *
+            (dataItem.diskon ? dataItem.diskon / 100 : 0)) *
+        (qty as number),
     } as IBasketItem;
     const newBaskets: TBaskets = baskets;
     newBaskets.push(newBasketItem);
@@ -85,18 +89,46 @@ function ModalItem({ isOpen, onClose, dataItem }: IPropsModalItem) {
           className="bg-white shadow-lg p-5 rounded-md grid grid-cols-2 w-[24rem] gap-x-5"
           ref={modalRef}
         >
-          <div className="col-span-1">
+          <div className="col-span-1 relative">
             <img
               src={dataItem.imageUrl}
               alt={`Gambar Produk ${dataItem.name}`}
-              className="w-36 object-cover rounded-md"
+              className="w-36 object-cover rounded-sm"
             />
-            <h1 className="font-semibold mt-4">{dataItem.name}</h1>
+            {dataItem.diskon ? (
+              <p className="font-bold rounded-br-sm w-fit absolute top-0 left-0 px-2 py-1 text-blue-600 bg-blue-200">
+                Diskon {dataItem.diskon}%
+              </p>
+            ) : (
+              ""
+            )}
+            <h1 className="font-semibold mt-2">{dataItem.name}</h1>
           </div>
           <div className="col-span-1">
-            <p className="font-semibold text-red-600 bg-red-100 px-4 py-1 rounded-md mb-4 w-fit">
-              {`Rp. ${dataItem.sellingPrice.toLocaleString("id-ID")}`}
+            {/* text harga */}
+            <p
+              className={`${
+                dataItem.diskon && "flex flex-col"
+              } font-semibold text-red-600 bg-red-100 px-4 py-1 rounded-md mb-4 w-fit`}
+            >
+              <span
+                className={
+                  dataItem.diskon ? "line-through text-gray-500 text-sm" : ""
+                }
+              >
+                {`Rp. ${dataItem.sellingPrice.toLocaleString("id-ID")}`}
+              </span>
+              {dataItem.diskon && (
+                <span>
+                  {`Rp. ${(
+                    dataItem.sellingPrice -
+                    (dataItem.sellingPrice * dataItem.diskon) / 100
+                  ).toLocaleString("id-ID")}`}
+                </span>
+              )}
             </p>
+            {/* end text harga */}
+
             <p className="bg-yellow-100 text-yellow-600 px-4 py-1 font-bold tracking-wider rounded-md w-fit">
               Stock {dataItem.stock}
             </p>

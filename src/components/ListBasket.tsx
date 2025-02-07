@@ -28,7 +28,10 @@ function ListBasket({ basket, onActive, onNonActive }: IListBasket) {
       <p className="leading-4 col-span-4">{basket.name}</p>
       <p className="font-semibold text-center col-span-1">{basket.qty}</p>
       <p className="text-right font-semibold col-span-3">
-        {`Rp. ${basket.sellingPrice.toLocaleString("id-ID")}`}
+        {`Rp. ${(
+          basket.sellingPrice -
+          (basket.sellingPrice * basket.diskon) / 100
+        ).toLocaleString("id-ID")}`}
       </p>
       <p className="text-right font-semibold col-span-4">
         {`Rp. ${basket.total.toLocaleString("id-ID")}`}

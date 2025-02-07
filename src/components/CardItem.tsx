@@ -21,10 +21,12 @@ function CardItem({ onClick, title, imgUrl, diskon }: IPropsCardItem) {
               alt="image"
             />
           )}
-          {diskon && (
-            <p className="bg-pink-200 text-lg font-bold py-2 absolute left-0 bottom-0">
+          {diskon ? (
+            <p className="bg-pink-200 rounded-bl-lg text-red-600 px-2 font-bold py-2 absolute right-0 top-0">
               {diskon}%
             </p>
+          ) : (
+            ""
           )}
         </div>
         <h3 className="mt-2 font-semibold text-sm text-gray-700">{title}</h3>

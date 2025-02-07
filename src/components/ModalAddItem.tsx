@@ -9,6 +9,7 @@ import { Mosaic } from "react-loading-indicators";
 import InputRp, { formatRupiah } from "./InputRp";
 import IItem from "../interface/Items";
 import { updateItem } from "../functions/updateItem";
+import InputDiskon from "./InputDiskon";
 
 interface IPropsAddModalItem {
   isOpen: boolean;
@@ -24,11 +25,13 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
   const [loading, setLoading] = useState<boolean>(false);
   const [hargaBeli, setHargaBeli] = useState<number>(0);
   const [hargaJual, setHargaJual] = useState<number>(0);
+  const [discount, setDiscount] = useState<number>(0);
 
   useEffect(() => {
     if (item) {
       setSelectedCategory(item.categori);
       setHargaBeli(item.purchasePrice);
+      item.diskon && setDiscount(item.diskon);
       setHargaJual(item.sellingPrice);
     }
   }, [item]);
@@ -70,7 +73,7 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
       purchasePrice: hargaBeli,
       sellingPrice: hargaJual,
       stock: Number(formData.get("qty")),
-      diskon: Number(formData.get("diskon")),
+      diskon: discount,
     };
 
     const data = item?.id
@@ -215,19 +218,15 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
             setValue={(value) => setHargaJual(value)}
           />
 
-          <input
-            placeholder="Diskon (%)"
-            max={100}
-            type="number"
-            value={item?.diskon}
-            name="diskon"
-            className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
+          <InputDiskon
+            defaultValue={item?.diskon}
+            onChange={(d) => setDiscount(d)}
           />
 
           <input
             placeholder="Qty"
             type="number"
-            value={item?.stock}
+            defaultValue={item?.stock}
             name="qty"
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
           />
