@@ -22,8 +22,10 @@ function SearchItem() {
   }
 
   function searchItem() {
-    const result = items.filter((item) =>
-      (item.name.toLowerCase() as string).includes(searchValue.toLowerCase())
+    const result = items.filter(
+      (item) =>
+        item.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        item.barcode.toLowerCase().includes(searchValue.toLowerCase())
     );
     setItems(result);
   }

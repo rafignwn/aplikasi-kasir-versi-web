@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { ICategory } from "../interface/categories";
 import deleteCategory from "../functions/deleteCategory";
 import toast from "react-hot-toast";
-import { CategoriesContext } from "../contexts/categoriesContext";
+import { CategoriesContext } from "../contexts/CategoriesContext";
 
 export default function CategoryItem({
   categoryData,

@@ -1,4 +1,12 @@
-import { Box, DashboardTwo, Exchange, Home, Log, Tag } from "@icon-park/react";
+import {
+  AllApplication,
+  Box,
+  DashboardTwo,
+  Exchange,
+  Home,
+  Log,
+  Tag,
+} from "@icon-park/react";
 import { NavLink } from "../components";
 import { Outlet } from "react-router-dom";
 
@@ -8,17 +16,16 @@ export default function Management() {
       <div className="col-span-2">
         <h2 className="text-center text-[2rem] px-4 py-2 border-r-4 border-b-4 border-yellow-500 bg-yellow-100 mx-10 rounded-md">
           <span className="text-blue-600 font-bold">BaJay</span>
+          <br />
           <span className="text-yellow-500 font-semibold">POS</span>
         </h2>
 
         {/* menu */}
         <div className="mt-10 px-5">
-          <NavLink to="/" Icon={Home} title="Home" />
-          <NavLink to="/management" Icon={DashboardTwo} title="Dashboard" />
+          <NavLink to="/" Icon={AllApplication} title="Home" />
           <NavLink to="/produk" Icon={Box} title="Produk" />
-          <NavLink to="/category" Icon={Tag} title="Category" />
+          <NavLink to="/category" Icon={Tag} title="Kategori" />
           <NavLink to="/transaksi" Icon={Exchange} title="Data Transaksi" />
-          <NavLink to="/report" Icon={Log} title="Report" />
         </div>
         {/* end menu */}
       </div>

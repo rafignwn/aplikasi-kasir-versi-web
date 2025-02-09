@@ -69,6 +69,7 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
     const file: File = formData.get("imageItem") as File;
     const itemData: IItemAdd = {
       name: formData.get("name") as string,
+      barcode: formData.get("barcode") as string,
       categori: selectedCategory,
       purchasePrice: hargaBeli,
       sellingPrice: hargaJual,
@@ -143,6 +144,15 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
             placeholder="Name of Item"
             value={item?.name}
             name="name"
+            type="text"
+            className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
+          />
+          <input
+            required
+            autoFocus={true}
+            placeholder="Barcode of Item"
+            value={item?.barcode}
+            name="barcode"
             type="text"
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
           />

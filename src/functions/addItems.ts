@@ -8,6 +8,7 @@ export interface IItemAdd {
   categori: string;
   purchasePrice: number;
   sellingPrice: number;
+  barcode: string;
   stock: number;
   diskon: number;
 }

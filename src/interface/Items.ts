@@ -6,6 +6,7 @@ interface IItem {
   purchasePrice: number;
   sellingPrice: number;
   stock: number;
+  barcode: string;
   diskon: number;
 }
 
