@@ -23,7 +23,7 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [imgName, setImageName] = useState<string>("");
   const { setItems } = useContext(ItemsContext);
-  const { catgories } = useContext(CategoriesContext);
+  const { categories } = useContext(CategoriesContext);
   const [loading, setLoading] = useState<boolean>(false);
   const [hargaBeli, setHargaBeli] = useState<number>(0);
   const [hargaJual, setHargaJual] = useState<number>(0);
@@ -189,7 +189,7 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
             onChange={(selected) =>
               setSelectedCategory(selected?.value as string)
             }
-            options={categories.map(k => ({value: k.value, label: k.label})}
+            options={categories.map(k => ({value: k.value, label: k.label}))}
             className="font-semibold rounded-md focus:border focus:border-sky-400 focus:outline-none border w-[24rem]"
           />
           {/* end react select */}
