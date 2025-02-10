@@ -144,7 +144,7 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
             required
             autoFocus={true}
             placeholder="Name of Item"
-            value={item?.name}
+            defaultValue={item?.name}
             name="name"
             type="text"
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
@@ -153,7 +153,7 @@ function ModalAddItem({ isOpen, onClose, item }: IPropsAddModalItem) {
             required
             autoFocus={true}
             placeholder="Barcode of Item"
-            value={item?.barcode}
+            defaultValue={item?.barcode}
             name="barcode"
             type="text"
             className="font-semibold px-4 py-2 rounded-md focus:border-[3px] focus:border-sky-400 focus:outline-none border w-[24rem]"
