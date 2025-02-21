@@ -8,7 +8,6 @@ import ListBasket from "./ListBasket";
 import ModalAddItem from "./ModalAddItem";
 import InputRp from "./InputRp";
 import NavLink from "./NavLink";
-import Tombol from "./Tombol";
 
 export {
   NavLink,

@@ -1,12 +1,4 @@
-import {
-  AllApplication,
-  Box,
-  DashboardTwo,
-  Exchange,
-  Home,
-  Log,
-  Tag,
-} from "@icon-park/react";
+import { AllApplication, Box, Exchange, Tag } from "@icon-park/react";
 import { NavLink } from "../components";
 import { Outlet } from "react-router-dom";
 

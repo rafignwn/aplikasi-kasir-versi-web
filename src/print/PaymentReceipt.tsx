@@ -10,7 +10,10 @@ export default React.forwardRef<HTMLDivElement, {}>(function PaymentReceipt(
   let totalAmount: number = 0;
 
   return (
-    <div ref={ref} className="font-mono text-[12px] bg-white">
+    <div
+      ref={ref}
+      className={`font-mono text-[12px] bg-white ${props ? "" : ""}`}
+    >
       <style type="text/css" media="print">
         {`
             @media print {

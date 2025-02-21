@@ -35,7 +35,7 @@ export async function updateItem(
       ...itemData,
       imageUrl,
       id,
-    };
+    } as IItem;
   } catch (error) {
     console.error("Error updating item:", error);
     return false;
